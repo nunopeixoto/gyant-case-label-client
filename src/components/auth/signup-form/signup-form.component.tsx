@@ -21,7 +21,9 @@ const SignupForm: React.FC = () => {
             setPasswordErrored(true);
         }
 
-        await createUser({ email, password });
+        if (!emailErrored && !passwordErrored) {
+            await createUser({ email, password });
+        }
     }
 
     const [createUser] = useCreateUserMutation();
