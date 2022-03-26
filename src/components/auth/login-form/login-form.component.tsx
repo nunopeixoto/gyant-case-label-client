@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
         try {
             const response = (await login({ email, password })) as { data: User};
             dispatch(setAuthState({ user: response.data }));
-            navigate('/case');
+            navigate('/');
         } catch (err) {
             console.log(err);
         }
