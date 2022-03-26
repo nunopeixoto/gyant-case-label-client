@@ -1,6 +1,7 @@
 import { Button, TextField, Link as MuiLink } from '@mui/material';
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
+import { useCreateUserMutation } from '../../../apis/users.api';
 
 const SignupForm: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ const SignupForm: React.FC = () => {
     const [password, setPassword] = useState('');
     const [passwordErrored, setPasswordErrored] = useState(false);
 
-    const handleSignup = () => {
+    const handleSignup = async () => {
         setEmailErrored(false);
         if (!email) {
             setEmailErrored(true);
@@ -19,7 +20,11 @@ const SignupForm: React.FC = () => {
         if (!password) {
             setPasswordErrored(true);
         }
+
+        await createUser({ email, password });
     }
+
+    const [createUser] = useCreateUserMutation();
     return(
         <div className="flex justify-center items-center flex-col h-screen gap-8">
             <h1 className="text-5xl"> Sign up </h1>
