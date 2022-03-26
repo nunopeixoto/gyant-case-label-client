@@ -1,20 +1,25 @@
+import React from 'react';
 import { Button, TextField, Link as MuiLink } from '@mui/material';
 import { Link } from "react-router-dom";
-import React from 'react';
-import {useState} from 'react';
+import { useNavigate } from "react-router";
+import { useState } from 'react';
 import { useLoginMutation } from '../../../apis/auth.api';
+import { User } from '../../../models/User';
+import { useAppDispatch } from '../../../app/hooks';
+import { setAuthState } from "../../../slices/auth.slice";
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
     const [emailErrored, setEmailErrored] = useState(false);
-
     const [password, setPassword] = useState('');
     const [passwordErrored, setPasswordErrored] = useState(false);
+    const [login] = useLoginMutation();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         setEmailErrored(false);
         if (!email) {
-            console.log('111');
             setEmailErrored(true);
         }
         
@@ -23,12 +28,19 @@ const LoginForm: React.FC = () => {
             setPasswordErrored(true);
         }
         
-        if (!emailErrored && !passwordErrored) {
-            await login({ email, password });
+        if (emailErrored || passwordErrored) {
+            return;
+        }
+
+        try {
+            const response = (await login({ email, password })) as { data: User};
+            dispatch(setAuthState({ user: response.data }));
+            navigate('/case');
+        } catch (err) {
+            console.log(err);
         }
     }
 
-    const [login] = useLoginMutation();
     return(
         <div className="flex justify-center items-center flex-col h-screen gap-8">
             <h1 className="text-5xl"> Case Label </h1>
