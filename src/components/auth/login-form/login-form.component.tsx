@@ -65,8 +65,8 @@ const LoginForm: React.FC = () => {
                     onChange={(event) => setPassword(event.target.value)}
                     error={passwordErrored}
                 />
-                <Link to="/signup" className="justify-self-start self-start mt-2">
-                    <MuiLink> Sign up</MuiLink>
+                <Link to="/signup" className="justify-self-start self-start mt-2 text-blue-600 hover:underline">
+                    <span className="text-underline"> Sign up </span> 
                 </Link>
             </div>
             <Button variant="contained" className="w-80" onClick={handleLogin}>
