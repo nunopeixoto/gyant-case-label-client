@@ -43,7 +43,7 @@ const LoginForm: React.FC = () => {
 
     return(
         <div className="flex justify-center items-center flex-col h-screen gap-8">
-            <h1 className="text-5xl"> Case Label </h1>
+            <h1 className="text-5xl"> Login </h1>
             <div className="flex flex-col gap-2">
                 <TextField
                     label="E-mail" 

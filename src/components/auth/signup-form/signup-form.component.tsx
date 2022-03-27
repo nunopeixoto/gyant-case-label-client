@@ -71,8 +71,8 @@ const SignupForm: React.FC = () => {
                     onChange={(event) => setPassword(event.target.value)}
                     error={passwordErrored}
                 />
-                <Link to="/login" className="justify-self-start self-start mt-2 text-blue-600">
-                    <span className="text-underline"> Login </span> 
+                <Link to="/login" className="justify-self-start self-start mt-2 text-blue-600 hover:underline">
+                    <span> Login </span> 
                 </Link>
             </div>
             <Button variant="contained" className="w-80" onClick={handleSignup}>

@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     return(
         <>
         <Header></Header>
-        <div className="grid grid-cols-3 gap-4 py-12 bg-gray-100">
+        <div className="grid grid-cols-3 gap-4 py-12">
             <div className="col-span-2 ml-24">
                 <h1 className="mb-2 flex justify-center items-center text-xl"> Please review this case </h1>
                 <div className="bg-white overflow-auto max-h-66vh h-min px-4 py-4 sm:rounded-lg">
