@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { authApi } from '../apis/auth.api';
+import { diagnosesApi } from '../apis/diagnoses.api';
 import { ehrsApi } from '../apis/ehrs.api';
 import { labelsApi } from '../apis/labels.api';
 import { usersApi } from '../apis/users.api';
@@ -11,6 +12,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [labelsApi.reducerPath]: labelsApi.reducer,
     [ehrsApi.reducerPath]: ehrsApi.reducer,
+    [diagnosesApi.reducerPath]: diagnosesApi.reducer,
     auth
   },
   middleware: (getDefaultMiddeware) => 
@@ -19,6 +21,7 @@ export const store = configureStore({
     .concat(authApi.middleware)
     .concat(labelsApi.middleware)
     .concat(ehrsApi.middleware)
+    .concat(diagnosesApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

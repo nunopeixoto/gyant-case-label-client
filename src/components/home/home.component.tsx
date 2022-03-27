@@ -1,24 +1,29 @@
 import * as React from 'react';
 import { Header} from '../header/header.component';
 import { LabelsList} from '../labels-list/labels-list.component';
-import { Button, TextField, Link as MuiLink, CircularProgress } from '@mui/material';
-import {Link} from 'react-router-dom';
-import { Label } from '../../models/label.model';
+import { Button, Link as MuiLink, CircularProgress } from '@mui/material';
 import { useGetNextEhrQuery } from '../../apis/ehrs.api';
-import {Navigate} from 'react-router';
 import {useAppSelector} from '../../app/hooks';
 import {selectCurrentUser} from '../../slices/auth.slice';
+import { useCreateDiagnosisMutation } from '../../apis/diagnoses.api';
 
 const Home: React.FC = () => {
     const [selectedLabelId, setSelectedLabelId] = React.useState('');
     const { data, isLoading } = useGetNextEhrQuery(undefined);
     const user = useAppSelector((state) => selectCurrentUser(state));
+    const [createDiagnosis] = useCreateDiagnosisMutation();
+    const label = async () => {
 
-    const label = () => {
-        console.log('label');
-        console.log(data._id);
-        console.log(selectedLabelId);
-        console.log(user?._id);
+
+        if (!user || !user._id) {
+            return;
+        }
+
+        let labelId = selectedLabelId;
+        let doctorId = user._id;
+        let ehrId = data._id;
+        let date = new Date;
+        await createDiagnosis({ doctorId, labelId,ehrId: ehrId, date });
     }
     return(
         <>
