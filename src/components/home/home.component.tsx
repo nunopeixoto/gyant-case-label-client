@@ -33,10 +33,10 @@ const Home: React.FC = () => {
     return(
         <>
         <Header></Header>
-        <div className="grid grid-cols-3 gap-4 py-12">
-            <div className="col-span-2 ml-24">
+        <div className="grid-rows-2 gap-4 py-12 xl:grid-rows-none xl:grid xl:grid-cols-3">
+            <div className="xl:col-span-2 xl:ml-24 pb-8">
                 <h1 className="mb-2 flex justify-center items-center text-xl"> Please review this case </h1>
-                <div className="bg-white overflow-auto max-h-66vh h-min px-4 py-4 sm:rounded-lg">
+                <div className="bg-white overflow-auto max-h-66vh h-min px-4 py-4 rounded-lg">
                     {isLoading && (
                         <div className="flex justify-center m-6">
                             <CircularProgress />
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
                     )}
                 </div>
             </div>
-            <div className="ml-4 mr-24">
+            <div className="sm:m-auto sm:w-2/4 xl:ml-4 xl:mr-24">
                 <LabelsList 
                     currentLabelId={selectedLabelId}
                     setSelectedLabelId={setSelectedLabelId}

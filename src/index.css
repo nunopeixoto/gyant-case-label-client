@@ -14,6 +14,12 @@
     background-color: rgb(243 244 246);
 }
 
+@media (min-width: 1280px) {
+    #root {
+        max-height: 100vh;
+        height: 100vh;
+    }
+}
 html {
     --scrollbarBG: #ffffff;
     --thumbBG: #969696;
