@@ -9,6 +9,9 @@ const SignupForm: React.FC = () => {
     
     const [password, setPassword] = useState('');
     const [passwordErrored, setPasswordErrored] = useState(false);
+
+    const [username, setUsername] = useState('');
+    const [usernameErrored, setUsernameErrored] = useState(false);
     const [createUser] = useCreateUserMutation();
 
     const handleSignup = async () => {
@@ -22,11 +25,16 @@ const SignupForm: React.FC = () => {
             setPasswordErrored(true);
         }
 
-        if (emailErrored || passwordErrored) {
+        setUsernameErrored(false);
+        if (!username) {
+            setUsernameErrored(true);
+        }
+
+        if (emailErrored || passwordErrored || usernameErrored) {
             return;
         }
         
-        await createUser({ email, password });
+        await createUser({ email, password, username });
     }
 
     return(
@@ -42,6 +50,16 @@ const SignupForm: React.FC = () => {
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     error={emailErrored}
+                />
+                <TextField
+                    label="Username" 
+                    className="w-80" 
+                    type="text" 
+                    required 
+                    helperText={usernameErrored && "Please enter a valid username."}
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
+                    error={usernameErrored}
                 />
                 <TextField
                     label="Password"
