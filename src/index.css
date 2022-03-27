@@ -10,6 +10,10 @@
     max-height: calc(100vh * 0.66);
 }
 
+#root {
+    background-color: rgb(243 244 246);
+}
+
 html {
     --scrollbarBG: #ffffff;
     --thumbBG: #969696;
