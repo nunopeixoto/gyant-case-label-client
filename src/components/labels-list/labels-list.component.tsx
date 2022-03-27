@@ -7,10 +7,10 @@ import { styled } from '@mui/material/styles';
 import { Label } from '../../models/label.model';
 
 interface LabelsListProps {
-    setSelectedLabelId: any,
+    setSelectedLabelId: (value: string) => void,
+    currentLabelId: string
 }
 const LabelsList: FC<LabelsListProps> = (props): JSX.Element => {
-    const [selectedLabelId, setSelectedLabelId] = React.useState('');
     const { data, isLoading } = useGetAllLabelsQuery(undefined);
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -23,7 +23,6 @@ const LabelsList: FC<LabelsListProps> = (props): JSX.Element => {
     }));
 
     const labelSelected = (id: string) => {
-        setSelectedLabelId(id);
         props.setSelectedLabelId(id);
     }
     return(
@@ -40,7 +39,7 @@ const LabelsList: FC<LabelsListProps> = (props): JSX.Element => {
                 <Item 
                     key={label._id}
                     onClick={() => labelSelected(label._id)}
-                    className={`${label._id === selectedLabelId ? 'label-selected' : ''}`}
+                    className={`${label._id === props.currentLabelId ? 'label-selected' : ''}`}
                 >
                     {label.description} ({label.code })
                 </Item>

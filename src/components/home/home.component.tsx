@@ -6,15 +6,14 @@ import { useGetNextEhrQuery } from '../../apis/ehrs.api';
 import {useAppSelector} from '../../app/hooks';
 import {selectCurrentUser} from '../../slices/auth.slice';
 import { useCreateDiagnosisMutation } from '../../apis/diagnoses.api';
+import {CreateDiagnosisRequest} from '../../dto/create-diagnosis-request.dto';
 
 const Home: React.FC = () => {
     const [selectedLabelId, setSelectedLabelId] = React.useState('');
-    const { data, isLoading } = useGetNextEhrQuery(undefined);
+    const { data, isLoading, refetch } = useGetNextEhrQuery(undefined);
     const user = useAppSelector((state) => selectCurrentUser(state));
     const [createDiagnosis] = useCreateDiagnosisMutation();
     const label = async () => {
-
-
         if (!user || !user._id) {
             return;
         }
@@ -24,6 +23,8 @@ const Home: React.FC = () => {
         let ehrId = data._id;
         let date = new Date;
         await createDiagnosis({ doctorId, labelId,ehrId: ehrId, date });
+        setSelectedLabelId('');
+        refetch();
     }
     return(
         <>
@@ -43,7 +44,10 @@ const Home: React.FC = () => {
                 </div>
             </div>
             <div className="ml-4 mr-24">
-                <LabelsList setSelectedLabelId={setSelectedLabelId}></LabelsList>
+                <LabelsList 
+                    currentLabelId={selectedLabelId}
+                    setSelectedLabelId={setSelectedLabelId}
+                ></LabelsList>
                 <div className="block mt-12 flex justify-center items-center">
                     <Button variant="contained" disabled={selectedLabelId === ''} onClick={label}>
                         Go to next
