@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useState } from 'react';
 import { useLoginMutation } from '../../../apis/auth.api';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user.model';
 import { useAppDispatch } from '../../../app/hooks';
 import { setAuthState } from "../../../slices/auth.slice";
 
