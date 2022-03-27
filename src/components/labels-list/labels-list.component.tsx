@@ -29,7 +29,7 @@ const LabelsList: FC<LabelsListProps> = (props): JSX.Element => {
     return(
         <>
         <h1 className="mb-2 flex justify-center items-center text-xl"> Select one condition </h1>
-        <div className=" bg-white overflow-auto h-66vh px-4 py-4 sm:rounded-lg">
+        <div className="bg-white overflow-auto h-66vh px-4 py-4 sm:rounded-lg">
             {isLoading && (
                 <div className="flex justify-center m-6">
                     <CircularProgress />
@@ -38,6 +38,7 @@ const LabelsList: FC<LabelsListProps> = (props): JSX.Element => {
             <Stack spacing={2}>
             {data && data.map((label: Label) => (
                 <Item 
+                    key={label._id}
                     onClick={() => labelSelected(label._id)}
                     className={`${label._id === selectedLabelId ? 'label-selected' : ''}`}
                 >
