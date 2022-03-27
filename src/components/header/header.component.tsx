@@ -29,7 +29,7 @@ const Header: React.FC = () => {
             <AppBar position="static">
                 <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Hello Doctor 
+                    Logged in as 
                     <small> { user?.username } </small>
                 </Typography>
                 <Button color="inherit" onClick={handleLogout}>Logout</Button>
