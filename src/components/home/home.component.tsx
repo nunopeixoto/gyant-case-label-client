@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Header} from '../header/header.component';
 import { LabelsList} from '../labels-list/labels-list.component';
-import { Button, Link as MuiLink, CircularProgress } from '@mui/material';
+import { Button, Link as CircularProgress } from '@mui/material';
 import { useGetNextEhrQuery } from '../../apis/ehrs.api';
 import {useAppSelector} from '../../app/hooks';
 import {selectCurrentUser} from '../../slices/auth.slice';
 import { useCreateDiagnosisMutation } from '../../apis/diagnoses.api';
-import {CreateDiagnosisRequest} from '../../dto/create-diagnosis-request.dto';
 
 const Home: React.FC = () => {
     const [selectedLabelId, setSelectedLabelId] = React.useState('');
@@ -21,7 +20,7 @@ const Home: React.FC = () => {
         let labelId = selectedLabelId;
         let doctorId = user._id;
         let ehrId = data._id;
-        let date = new Date;
+        let date = new Date();
         await createDiagnosis({ doctorId, labelId,ehrId: ehrId, date });
         setSelectedLabelId('');
         refetch();
