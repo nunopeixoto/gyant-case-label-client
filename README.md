@@ -1,44 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# GYANT - Case label assignment
 
-## Available Scripts
+## Overview
+The project is divided in two repositories:
+  - [gyant-case-label-api](https://github.com/nunopeixoto/gyant-case-label-api) NestJS w/ TypeScript <br>
+  - [gyant-case-label-client](https://github.com/nunopeixoto/gyant-case-label-client) React w/ TypeScript
 
-In the project directory, you can run:
+## Project setup instructions
+#### gyant-case-label-api
+```bash
+git clone https://github.com/nunopeixoto/gyant-case-label-api.git
+cd gyant-case-label-api
+npm install
 
-### `npm start`
+# Update .env as you desire. Note that I will provide you with a database connection URI that already contains some seeded data.
+cp .env.example .env
+vi .env
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+npm run start
+```
+___
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Setup gyant-case-label-client
+```bash
+git clone https://github.com/nunopeixoto/gyant-case-label-client.git
+cd gyant-case-label-client
+npm install
 
-### `npm test`
+# Optional - update port
+cp .env.example .env
+vi .env
+# If you used a port different than 3001 on the gyant-case-label-api, edit the line 5 of the package.json**
+vi package.json
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm run start
 
-### `npm run build`
+```
+** This change is needed to avoid cors errors
+___
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Database
+- I will provide you a database connection URI to add on the gyant-case-label-api 
+- This already has a signed up user (e-mail: user@test.com password: 123)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+___
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## General notes about the assignment
+- I didn't find a way to create a command to seed the database, so I will provide you with a database connection URI so you can connect to an already seeded database (hosted on the cloud). However, if you want to try the projects out in a local database [here are the collections to import](https://www.dropbox.com/scl/fo/xl0c2dajt7pqoew6y9r3k/h?dl=0&rlkey=jdhecuypnqjgu4q6sst3j0o3y)
+- Given the time constraints, I opted not to go with 100% test coverage. With that said, I still developed tests for the UsersModule (both unit and e2e).
+- This was my first experience with NestJS and React and even though I made the effort to read some documentation and find good tutorials, to be able to finish the assignment in a timely fashion I'm sure that missed a lot of key concepts, design patterns and best practices on both.
+- I used httpOnly cookie so the session is not persistent.
