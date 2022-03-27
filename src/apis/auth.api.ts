@@ -5,17 +5,23 @@ import { User } from "../models/user.model";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "/auth/login",
+    baseUrl: "/auth",
   }),
   endpoints: (build) => ({
     login: build.mutation<User, LoginRequest>({
       query: (loginRequest) => ({
-        url: "/",
+        url: "/login",
         method: "POST",
         body: loginRequest,
       }),
     }),
+    logout: build.mutation<[], []>({
+      query: () => ({
+        url: "/logout",
+        method: "POST"
+      })
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation } = authApi;
