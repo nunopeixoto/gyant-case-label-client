@@ -10,7 +10,7 @@ import {CreateDiagnosisRequest} from '../../dto/create-diagnosis-request.dto';
 
 const Home: React.FC = () => {
     const [selectedLabelId, setSelectedLabelId] = React.useState('');
-    const { data, isLoading, refetch } = useGetNextEhrQuery(undefined);
+    const { data, isLoading, refetch, error} = useGetNextEhrQuery(undefined);
     const user = useAppSelector((state) => selectCurrentUser(state));
     const [createDiagnosis] = useCreateDiagnosisMutation();
     const label = async () => {
@@ -26,6 +26,10 @@ const Home: React.FC = () => {
         setSelectedLabelId('');
         refetch();
     }
+
+    const buttonShouldBeDisabled = () : boolean => {
+        return selectedLabelId === '' || error !== undefined;
+    }
     return(
         <>
         <Header></Header>
@@ -38,7 +42,12 @@ const Home: React.FC = () => {
                             <CircularProgress />
                         </div>
                     )}
-                    {data &&  (
+                    {error && (
+                        <div className="flex justify-center m-6">
+                            You are done. 
+                        </div>
+                    )}
+                    {!error && data &&  (
                         <span> {data.text} </span>
                     )}
                 </div>
@@ -49,7 +58,7 @@ const Home: React.FC = () => {
                     setSelectedLabelId={setSelectedLabelId}
                 ></LabelsList>
                 <div className="block mt-12 flex justify-center items-center">
-                    <Button variant="contained" disabled={selectedLabelId === ''} onClick={label}>
+                    <Button variant="contained" disabled={buttonShouldBeDisabled()} onClick={label}>
                         Go to next
                     </Button>
                 </div>
