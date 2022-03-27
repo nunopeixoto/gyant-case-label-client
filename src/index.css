@@ -6,6 +6,10 @@
     height: calc(100vh * 0.66);
 }
 
+.max-h-66vh {
+    max-height: calc(100vh * 0.66);
+}
+
 html {
     --scrollbarBG: #ffffff;
     --thumbBG: #969696;
