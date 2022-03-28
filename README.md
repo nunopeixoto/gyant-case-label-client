@@ -29,7 +29,7 @@ npm install
 # Optional - update port
 cp .env.example .env
 vi .env
-# If you used a port different than 3001 on the gyant-case-label-api, edit the line 5 of the package.json**
+# If you used a port different than 3001 on the gyant-case-label-api, edit the proxy (line 5 of the package.json)**
 vi package.json
 
 npm run start
